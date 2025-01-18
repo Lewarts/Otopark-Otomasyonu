@@ -1,3 +1,6 @@
+/*Onur Soysal 
+2412721053
+Bilgisayar MÃ¼hendisliÄŸi 1. sÄ±nÄ±f Otopark Otomasyonu Ã¶devi*/
 #include <iomanip>
 #include <cstring>
 #include <stdlib.h>
@@ -29,12 +32,12 @@ int main() {
     do {
         system("cls");
         cout << "|-------Otopark Otomasyonu------|" << endl;
-        cout << "|          Seçim Yapiniz        |" << endl;
-        cout << "|      1- Araç Ekleme           |" << endl;
-        cout << "|      2- Araç Listeleme        |" << endl;
-        cout << "|      3- Araç Arama            |" << endl;
-        cout << "|      4- Araç Sil              |" << endl;
-        cout << "|      5- Araç Duzenle          |" << endl;
+        cout << "|          SeÃ§im Yapiniz        |" << endl;
+        cout << "|      1- AraÃ§ Ekleme           |" << endl;
+        cout << "|      2- AraÃ§ Listeleme        |" << endl;
+        cout << "|      3- AraÃ§ Arama            |" << endl;
+        cout << "|      4- AraÃ§ Sil              |" << endl;
+        cout << "|      5- AraÃ§ Duzenle          |" << endl;
         cout << "|--------------------------------|" << endl;
 
         char secim;
@@ -57,11 +60,11 @@ int main() {
                 AracDuzenle();
                 break;
             default:
-                cout << "Geçersiz seçim!" << endl;
+                cout << "GeÃ§ersiz seÃ§im!" << endl;
                 break;
         }
 
-        cout << "Anamenuye Donmek icin: a basin, çikmak için: c" << endl;
+        cout << "Anamenuye Donmek icin: a basin, Ã§ikmak iÃ§in: c" << endl;
         cin >> anamenu;
 
     } while (anamenu == 'a' || anamenu == 'A');
@@ -74,7 +77,7 @@ Arac arac;
 void AracEkle() {
     ofstream yaz("arac.dat", ios::binary | ios::app);
     if (!yaz) {
-        cout << "Dosya açýlmadý!" << endl;
+        cout << "Dosya aÃ§Ä±lmadÄ±!" << endl;
         return;
     }
 
@@ -83,15 +86,15 @@ void AracEkle() {
 
     do {
         cin.ignore();
-        cout << "Araç Plaka Giriniz: ";
+        cout << "AraÃ§ Plaka Giriniz: ";
         cin.getline(arac.plaka, sizeof(arac.plaka));
-        cout << "Araç Marka Giriniz: ";
+        cout << "AraÃ§ Marka Giriniz: ";
         cin.getline(arac.marka, sizeof(arac.marka));
-        cout << "Araç Model Giriniz: ";
+        cout << "AraÃ§ Model Giriniz: ";
         cin.getline(arac.model, sizeof(arac.model));
-        cout << "Araç Sahibi Ad Giriniz: ";
+        cout << "AraÃ§ Sahibi Ad Giriniz: ";
         cin.getline(arac.sahib_ad, sizeof(arac.sahib_ad));
-        cout << "Araç Sahibi Soyad Giriniz: ";
+        cout << "AraÃ§ Sahibi Soyad Giriniz: ";
         cin.getline(arac.sahib_soyad, sizeof(arac.sahib_soyad));
 
         yaz.write((char*)&arac, sizeof(arac));
@@ -110,7 +113,7 @@ void AracEkle() {
 void AracListeleme() {
     ifstream oku("arac.dat", ios::binary);
     if (!oku) {
-        cout << "Dosya açýlmadý!" << endl;
+        cout << "Dosya aÃ§Ä±lmadÄ±!" << endl;
         return;
     }
 
@@ -118,13 +121,13 @@ void AracListeleme() {
     int kayitsayisi = oku.tellg() / sizeof(arac);
     oku.seekg(0, ios::beg);
 
-    cout << "Toplam Araç Kayit Sayisi: " << kayitsayisi << endl;
+    cout << "Toplam AraÃ§ Kayit Sayisi: " << kayitsayisi << endl;
 
     if (kayitsayisi > 0) {
         for (int i = 0; i < kayitsayisi; i++) {
             oku.read((char*)&arac, sizeof(arac));
 
-            cout << i + 1 << ". Araç Bilgileri:" << endl;
+            cout << i + 1 << ". AraÃ§ Bilgileri:" << endl;
             cout << "Plaka: " << arac.plaka << endl;
             cout << "Marka: " << arac.marka << endl;
             cout << "Model: " << arac.model << endl;
@@ -141,7 +144,7 @@ void AracListeleme() {
 void AracArama() {
     ifstream oku("arac.dat", ios::binary);
     if (!oku) {
-        cout << "Dosya açýlmadý!" << endl;
+        cout << "Dosya aÃ§Ä±lmadÄ±!" << endl;
         return;
     }
 
@@ -150,7 +153,7 @@ void AracArama() {
     oku.seekg(0, ios::beg);
 
     cin.ignore();
-    cout << "Aranacak Araç Plakasi Giriniz: ";
+    cout << "Aranacak AraÃ§ Plakasi Giriniz: ";
     char plaka[20];
     cin.getline(plaka, sizeof(plaka));
 
@@ -160,7 +163,7 @@ void AracArama() {
         oku.read((char*)&arac, sizeof(arac));
 
         if (strcmp(arac.plaka, plaka) == 0) {
-            cout << "Araç Bilgileri:" << endl;
+            cout << "AraÃ§ Bilgileri:" << endl;
             cout << "Plaka: " << arac.plaka << endl;
             cout << "Marka: " << arac.marka << endl;
             cout << "Model: " << arac.model << endl;
@@ -181,18 +184,18 @@ void AracArama() {
 void AracSil() {
     ifstream oku("arac.dat", ios::binary);
     if (!oku) {
-        cout << "Dosya açýlmadý!" << endl;
+        cout << "Dosya aÃ§Ä±lmadÄ±!" << endl;
         return;
     }
 
     ofstream yedek("yedek.dat", ios::binary);
     if (!yedek) {
-        cout << "Yedek dosya oluþturulamadý!" << endl;
+        cout << "Yedek dosya oluÅŸturulamadÄ±!" << endl;
         oku.close();
         return;
     }
 
-    cout << "Silinecek Araç Plakasi Giriniz: ";
+    cout << "Silinecek AraÃ§ Plakasi Giriniz: ";
     char plaka[20];
     cin.ignore();
     cin.getline(plaka, sizeof(plaka));
@@ -223,18 +226,18 @@ void AracSil() {
 void AracDuzenle() {
     ifstream oku("arac.dat", ios::binary);
     if (!oku) {
-        cout << "Dosya açýlmadý!" << endl;
+        cout << "Dosya aÃ§Ä±lmadÄ±!" << endl;
         return;
     }
 
     ofstream yedek("yedek.dat", ios::binary);
     if (!yedek) {
-        cout << "Yedek dosya oluþturulamadý!" << endl;
+        cout << "Yedek dosya oluÅŸturulamadÄ±!" << endl;
         oku.close();
         return;
     }
 
-    cout << "Duzenlenecek Araç Plakasi Giriniz: ";
+    cout << "Duzenlenecek AraÃ§ Plakasi Giriniz: ";
     char plaka[20];
     cin.ignore();
     cin.getline(plaka, sizeof(plaka));
@@ -244,7 +247,7 @@ void AracDuzenle() {
     while (oku.read((char*)&arac, sizeof(arac))) {
         if (strcmp(arac.plaka, plaka) == 0) {
             bulundu = true;
-            cout << "Yeni Araç Bilgilerini Giriniz:" << endl;
+            cout << "Yeni AraÃ§ Bilgilerini Giriniz:" << endl;
             cout << "Plaka: ";
             cin.getline(arac.plaka, sizeof(arac.plaka));
             cout << "Marka: ";
